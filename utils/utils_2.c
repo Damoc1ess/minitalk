@@ -62,11 +62,11 @@ char	*ft_itoa(int n)
 	if (n < 0)
 		ncpy = -n;
 	i = int_len(n);
-	str = (char *)malloc(sizeof(char) * (i + 2));
+	str = (char *)malloc(sizeof(char) * (i));
 	if (!str)
 		return (NULL);
-	str[i] = ':';
-	str[i + 1] = '\0';
+	// str[i] = ':';
+	// str[i + 1] = '\0';
 	i--;
 	if (ncpy == 0)
 		str[i] = '0';

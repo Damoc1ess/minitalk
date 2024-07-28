@@ -15,24 +15,25 @@ void sigusr_receiver(int sig)
 		c = c << 1 | 1;
 	bit_count++;
 
-	if (bit_count == 8 && trigger == 1)
-	{
-		if (c == ':')
-		{
-			trigger = 0;
-			bit_count = 0;
-			str = malloc(sizeof(char) * (len + 1));
-		}	
-		else
-		{
-			len = len * 10 + c - '0';
-			bit_count = 0;
-		}
-	}
+	// if (bit_count == 8 && trigger == 1)
+	// {
+	// 	if (c == ':')
+	// 	{
+	// 		trigger = 0;
+	// 		bit_count = 0;
+	// 		str = malloc(sizeof(char) * (len + 1));
+	// 	}	
+	// 	else
+	// 	{
+	// 		len = len * 10 + c - '0';
+	// 		bit_count = 0;
+	// 	}
+	// }
 	if (bit_count == 8)
 	{
-		str[i] = 'c';
-		i++;
+		write (1, &c, 1);
+		// str[i] = 'c';
+		// i++;
 		c = 0;
 		bit_count = 0;
 	}
@@ -45,6 +46,7 @@ int main(void)
 	signal(SIGUSR1, sigusr_receiver);
 	signal(SIGUSR2, sigusr_receiver);
 	while (1)
-		pause(); // Wait for signals
+	{}
+		// pause(); // Wait for signals
 	return (0);
 }

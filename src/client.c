@@ -30,10 +30,10 @@ void send_sig(int pid, char *str)
 {
 	int i;
 	char c;
-	int trigger = 1;
+	// int trigger = 1;
 	
-	if (trigger == 1)
-		send_len(ft_strlen(str), pid);
+	// if (trigger == 1)
+	// 	send_len(ft_strlen(str), pid);
 	i = 0;
 	while (*str)
 	{
@@ -60,9 +60,10 @@ int main(int argc, char **argv)
 		ft_putstr("Error\n");
 		return (-1);
 	}
-	else
-	{
-		send_sig(ft_atoi(argv[1]), argv[2]);
-	}
+	char *sep = ":";
+	char *len = ft_itoa(ft_strlen(argv[2]));
+	send_sig(ft_atoi(argv[1]), len);
+	send_sig(ft_atoi(argv[1]), sep);
+	send_sig(ft_atoi(argv[1]), argv[2]);
 	return (0);
 }
