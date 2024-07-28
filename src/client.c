@@ -19,7 +19,7 @@ void send_len(int len, int pid)
 				kill(pid, SIGUSR2);
 			c = c << 1;
 			i++;
-			usleep(1);
+			usleep(1000);
 		}
 		i = 0;
 		lenght++;
@@ -46,7 +46,7 @@ void send_sig(int pid, char *str)
 				kill(pid, SIGUSR2);
 			c = c << 1;
 			i++;
-			usleep(1);
+			usleep(1000);
 		}
 		i = 0;
 		str++;

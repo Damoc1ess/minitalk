@@ -1,35 +1,37 @@
-# Nom des exécutables
-CLIENT = client
-SERVER = server
 
-# Dossiers
-SRC_DIR = src
-UTILS_DIR = utils
-INCLUDE_DIR = utils
+NAME = lib_minitalk.a
 
-# Fichiers sources
-CLIENT_SRC = $(SRC_DIR)/client.c
-SERVER_SRC = $(SRC_DIR)/server.c
-UTILS_SRC = $(UTILS_DIR)/ft_printfdubled.c
+CC = cc
 
-# Options de compilation
-CFLAGS = -Wall -Wextra -Werror
-CC = gcc
+# CFLAGS = -Wall -Wextra -Werror
 
-# Cibles
-all: $(CLIENT) $(SERVER)
+SRC_C = src/server.c\
+			src/client.c\
+			utils/utils_1.c\
+			utils/utils_2.c\
 
-$(CLIENT): $(CLIENT_SRC) $(UTILS_SRC)
-	$(CC) $(CFLAGS) $(CLIENT_SRC) -o $(CLIENT) $(UTILS_SRC)
 
-$(SERVER): $(SERVER_SRC) $(UTILS_SRC)
-	$(CC) $(CFLAGS) $(SERVER_SRC) -o $(SERVER) $(UTILS_SRC)
+OBJS =  server.o\
+			client.o\
+			utils_1.o\
+			utils_2.o\
 
-clean:
-	rm - $(CLIENT) $(SERVER) $() *.o
+all : $(NAME)
 
-fclean: clean
+$(NAME) :
+	@$(CC) $(CFLAGS) $(SRC_C) -c
+	@ar -rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
+	@$(CC) $(CFLAGS) src/server.c $(NAME) -o server
+	@$(CC) $(CFLAGS) src/client.c $(NAME) -o client
 
-re: fclean all
+clean :
+	@rm -rf $(OBJS)
 
-.PHONY: all clean fclean re
+fclean : clean
+	@rm -rf server
+	@rm -rf client
+	@rm -rf $(NAME)
+
+re : fclean all
+	@rm -rf $(OBJS)

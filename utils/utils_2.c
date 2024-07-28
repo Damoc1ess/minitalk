@@ -30,25 +30,25 @@ static int	int_len(int n)
 	return (len);
 }
 
-char	*ft_strdup(const char *s)
-{
-	int		i;
-	int		len;
-	char	*str;
+// char	*ft_strdup(const char *s)
+// {
+// 	int		i;
+// 	int		len;
+// 	char	*str;
 
-	i = 0;
-	len = ft_strlen(s);
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	while (i < len)
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
+// 	i = 0;
+// 	len = ft_strlen(s);
+// 	str = malloc(sizeof(char) * (len + 1));
+// 	if (!str)
+// 		return (NULL);
+// 	while (i < len)
+// 	{
+// 		str[i] = s[i];
+// 		i++;
+// 	}
+// 	str[i] = '\0';
+// 	return (str);
+// }
 
 char	*ft_itoa(int n)
 {
@@ -57,15 +57,16 @@ char	*ft_itoa(int n)
 	char	*str;
 
 	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
+		return ("-2147483648");
 	ncpy = n;
 	if (n < 0)
 		ncpy = -n;
 	i = int_len(n);
-	str = (char *)malloc(sizeof(char) * (i + 1));
+	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return (NULL);
-	str[i] = '\0';
+	str[i] = ':';
+	str[i + 1] = '\0';
 	i--;
 	if (ncpy == 0)
 		str[i] = '0';

@@ -4,26 +4,35 @@ void sigusr_receiver(int sig)
 {
 	static int bit_count = 0;
 	static unsigned char c = 0;
-	static int pid = -1;
 	static int trigger = 1;
 	static int len = 0;
+	static char *str;
+	static int i = 0;
 
 	if (sig == SIGUSR2)
 		c = c << 1;
 	else if (sig == SIGUSR1)
-		c = c << 1 | 0b00000001;
+		c = c << 1 | 1;
 	bit_count++;
 
-	if( bit_count == 8 && trigger == 1)
+	if (bit_count == 8 && trigger == 1)
 	{
 		if (c == ':')
+		{
 			trigger = 0;
+			bit_count = 0;
+			str = malloc(sizeof(char) * (len + 1));
+		}	
 		else
+		{
 			len = len * 10 + c - '0';
+			bit_count = 0;
+		}
 	}
 	if (bit_count == 8)
 	{
-			write(1, &c, 1);
+		str[i] = 'c';
+		i++;
 		c = 0;
 		bit_count = 0;
 	}
