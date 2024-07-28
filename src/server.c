@@ -8,6 +8,7 @@ void sigusr_receiver(int sig)
 	static int len = 0;
 	static char *str;
 	static int i = 0;
+	// static char len[10];
 
 	if (sig == SIGUSR2)
 		c = c << 1;
@@ -15,27 +16,36 @@ void sigusr_receiver(int sig)
 		c = c << 1 | 1;
 	bit_count++;
 
-	// if (bit_count == 8 && trigger == 1)
-	// {
-	// 	if (c == ':')
-	// 	{
-	// 		trigger = 0;
-	// 		bit_count = 0;
-	// 		str = malloc(sizeof(char) * (len + 1));
-	// 	}	
-	// 	else
-	// 	{
-	// 		len = len * 10 + c - '0';
-	// 		bit_count = 0;
-	// 	}
-	// }
+	if (bit_count == 8 && trigger == 1)
+	{
+		if (c == ':')
+		{
+			trigger = 0;
+			bit_count = 0;
+			str = malloc(sizeof(char) * (len + 1));
+		}
+		else
+		{
+			len = len * 10 + c - '0';
+			bit_count = 0;
+		}
+	}
 	if (bit_count == 8)
 	{
-		write (1, &c, 1);
-		// str[i] = 'c';
-		// i++;
+		// write (1, &c, 1);
+		str[i] = c;
+		i++;
 		c = 0;
 		bit_count = 0;
+		if (i == len){
+			str[i] = '\0';
+			ft_putstr(str);
+			free(str);
+			str = NULL;
+			i = 0;
+			len = 0;
+			trigger = 1;
+		}
 	}
 }
 

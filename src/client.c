@@ -62,6 +62,8 @@ int main(int argc, char **argv)
 	}
 	char *sep = ":";
 	char *len = ft_itoa(ft_strlen(argv[2]));
+	if (ft_strlen(argv[2]) == 0)
+		return (0);
 	send_sig(ft_atoi(argv[1]), len);
 	send_sig(ft_atoi(argv[1]), sep);
 	send_sig(ft_atoi(argv[1]), argv[2]);
