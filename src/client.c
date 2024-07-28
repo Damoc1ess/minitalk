@@ -19,7 +19,7 @@ void send_len(int len, int pid)
 				kill(pid, SIGUSR2);
 			c = c << 1;
 			i++;
-			usleep(1000);
+			usleep(100);
 		}
 		i = 0;
 		lenght++;
@@ -46,7 +46,7 @@ void send_sig(int pid, char *str)
 				kill(pid, SIGUSR2);
 			c = c << 1;
 			i++;
-			usleep(1000);
+			usleep(100);
 		}
 		i = 0;
 		str++;
@@ -62,9 +62,12 @@ int main(int argc, char **argv)
 	}
 	char *sep = ":";
 	char *len = ft_itoa(ft_strlen(argv[2]));
+	char *pid = ft_itoa(getpid());
 	if (ft_strlen(argv[2]) == 0)
 		return (0);
 	send_sig(ft_atoi(argv[1]), len);
+	send_sig(ft_atoi(argv[1]), sep);
+	send_sig(ft_atoi(argv[1]), pid);
 	send_sig(ft_atoi(argv[1]), sep);
 	send_sig(ft_atoi(argv[1]), argv[2]);
 	return (0);
