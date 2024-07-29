@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/29 11:08:10 by fflamion          #+#    #+#             */
+/*   Updated: 2024/07/29 11:12:36 by fflamion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minitalk.h"
 
-void ft_putnbr(int n)
+void	ft_putnbr(int n)
 {
-	long int (nbr);
-	nbr = n;
-	char c;
+	long int	nbr;
+	char		c;
 
+	nbr = n;
 	if (nbr < 0)
 	{
-		write(1,"-", 1);
+		write (1, "-", 1);
 		nbr *= -1;
 	}
 	if (nbr > 9)
@@ -17,9 +29,9 @@ void ft_putnbr(int n)
 	write(1, &c, 1);
 }
 
-void ft_putstr(char *str)
+void	ft_putstr(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -27,16 +39,16 @@ void ft_putstr(char *str)
 	write(1, str, i);
 }
 
-int ft_atoi(char *str)
+int	ft_atoi(char *str)
 {
-	int neg;
-	int num;
+	int	neg;
+	int	num;
 
 	neg = 1;
 	num = 0;
-	if(*str == '-')
+	if (*str == '-')
 	{
-		neg= -1;
+		neg = -1;
 		str++;
 	}
 	while (*str)

@@ -1,5 +1,16 @@
-#include "../include/minitalk.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/29 11:15:19 by fflamion          #+#    #+#             */
+/*   Updated: 2024/07/29 11:16:57 by fflamion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../include/minitalk.h"
 
 int	ft_strlen(const char *str)
 {
@@ -30,26 +41,6 @@ static int	int_len(int n)
 	return (len);
 }
 
-// char	*ft_strdup(const char *s)
-// {
-// 	int		i;
-// 	int		len;
-// 	char	*str;
-
-// 	i = 0;
-// 	len = ft_strlen(s);
-// 	str = malloc(sizeof(char) * (len + 1));
-// 	if (!str)
-// 		return (NULL);
-// 	while (i < len)
-// 	{
-// 		str[i] = s[i];
-// 		i++;
-// 	}
-// 	str[i] = '\0';
-// 	return (str);
-// }
-
 char	*ft_itoa(int n)
 {
 	int		ncpy;
@@ -65,8 +56,6 @@ char	*ft_itoa(int n)
 	str = (char *)malloc(sizeof(char) * (i));
 	if (!str)
 		return (NULL);
-	// str[i] = ':';
-	// str[i + 1] = '\0';
 	i--;
 	if (ncpy == 0)
 		str[i] = '0';
@@ -78,4 +67,11 @@ char	*ft_itoa(int n)
 	if (n < 0)
 		str[i] = '-';
 	return (str);
+}
+
+void	ft_putstr_red(const char *str)
+{
+	write(1, "\033[31m", 5);
+	write(1, str, ft_strlen(str));
+	write(1, "\033[0m", 4);
 }
