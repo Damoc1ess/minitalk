@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:05:22 by fflamion          #+#    #+#             */
-/*   Updated: 2024/07/29 16:58:28 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:09:01 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	pid = ft_atoi(argv[1]);
-	if (pid <= 0)
+	if (pid <= 3)
 	{
 		ft_putstr_red("Invalid PID\n");
 		return (1);

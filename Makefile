@@ -3,7 +3,8 @@ NAME = lib_minitalk.a
 
 CC = cc
 
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 SRC_C = src/server.c\
 			src/client.c\

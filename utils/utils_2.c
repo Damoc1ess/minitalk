@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:15:19 by fflamion          #+#    #+#             */
-/*   Updated: 2024/07/29 16:09:42 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:31:16 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ char	*ft_itoa(int n)
 	if (n < 0)
 		ncpy = -n;
 	i = int_len(n);
-	str = (char *)malloc(sizeof(char) * (i));
+	str = (char *)malloc(sizeof(char) * (i + 1));
 	if (!str)
 		return (NULL);
+	str[i] = '\0';
 	i--;
 	if (ncpy == 0)
 		str[i] = '0';

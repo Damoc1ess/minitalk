@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:05:51 by fflamion          #+#    #+#             */
-/*   Updated: 2024/07/29 16:57:59 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:05:04 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,11 @@ void	sigusr_receiver(int sig)
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
+	argv[0] = NULL;
+	if (argc != 1)
+		return (0);
 	ft_putnbr(getpid());
 	write(1, "\n", 1);
 	signal(SIGUSR1, sigusr_receiver);
