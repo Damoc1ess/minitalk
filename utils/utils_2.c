@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:15:19 by fflamion          #+#    #+#             */
-/*   Updated: 2024/07/29 11:16:57 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:09:42 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,14 @@ void	ft_putstr_red(const char *str)
 	write(1, "\033[31m", 5);
 	write(1, str, ft_strlen(str));
 	write(1, "\033[0m", 4);
+}
+
+void	reset_char_state(unsigned char *c, char **str)
+{
+	*c = 0;
+	if (*str)
+	{
+		free(*str);
+		*str = NULL;
+	}
 }

@@ -6,25 +6,21 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:05:51 by fflamion          #+#    #+#             */
-/*   Updated: 2024/07/29 11:31:51 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:57:59 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
 
-void	reset_state(int *bit_count, unsigned char *c, int *trigger, int *len, char **str, int *i)
+typedef struct s_state
 {
-	*bit_count = 0;
-	*c = 0;
-	*trigger = 1;
-	*len = 0;
-	*i = 0;
-	if (*str)
-	{
-		free(*str);
-		*str = NULL;
-	}
-}
+	int				bit_count;
+	unsigned char	c;
+	int				trigger;
+	int				len;
+	char			*str;
+	int				i;
+}				t_state;
 
 void	handle_bit(int sig, unsigned char *c, int *bit_count)
 {
@@ -58,30 +54,28 @@ void	process_character(int *i, int len, unsigned char c, char **str)
 
 void	sigusr_receiver(int sig)
 {
-	static int		bit_count = 0;
-	static unsigned char c = 0;
-	static int		trigger = 1;
-	static int		len = 0;
-	static char		*str = NULL;
-	static int		i = 0;
+	static t_state	s = {0, 0, 1, 0, NULL, 0};
 
-	handle_bit(sig, &c, &bit_count);
-	if (bit_count == 8)
+	handle_bit(sig, &s.c, &s.bit_count);
+	if (s.bit_count == 8)
 	{
-		if (trigger == 1)
+		if (s.trigger == 1)
 		{
-			process_length(&trigger, &len, c);
-			if (!str && trigger == 0)
-				str = malloc(len + 1);
+			process_length(&s.trigger, &s.len, s.c);
+			if (!s.str && s.trigger == 0)
+				s.str = malloc(s.len + 1);
 		}
 		else
 		{
-			process_character(&i, len, c, &str);
-			if (i == len)
-				reset_state(&bit_count, &c, &trigger, &len, &str, &i);
+			process_character(&s.i, s.len, s.c, &s.str);
+			if (s.i == s.len)
+			{
+				reset_int_state(&s.bit_count, &s.trigger, &s.len, &s.i);
+				reset_char_state(&s.c, &s.str);
+			}
 		}
-		bit_count = 0;
-		c = 0;
+		s.bit_count = 0;
+		s.c = 0;
 	}
 }
 

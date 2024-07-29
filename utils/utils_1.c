@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:08:10 by fflamion          #+#    #+#             */
-/*   Updated: 2024/07/29 11:12:36 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/07/29 16:09:42 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,12 @@ int	ft_atoi(char *str)
 		str++;
 	}
 	return (num * neg);
+}
+
+void	reset_int_state(int *bit_count, int *trigger, int *len, int *i)
+{
+	*bit_count = 0;
+	*trigger = 1;
+	*len = 0;
+	*i = 0;
 }
